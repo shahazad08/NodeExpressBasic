@@ -1,27 +1,29 @@
 console.log("Welcome to Express JS");
 
 
+const bodyParser = require('body-parser');
 const express=require('express')
 
 const app=express();
+app.use(bodyParser.urlencoded({extended:false}))
 
-app.use('/', (req, res, next) => {
-    console.log("in the another Middleware")
-    //res.send('<h1>Hello From Express JS</h1>')
-    next()
-})
+
 
 app.use('/add-product', (req, res, next)=> {
     console.log("Add Product Pagee");
-    res.send('<h1>The Add product Page</h1>')
+    res.send('<form action="/product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></form>')
+});
+
+app.post('/product', (req, res, next) => {
+    console.log(req.body)
+    res.redirect('/');
 })
 
 
-app.use('/',(req, res, next) => {
-    console.log("Welcome Page------")
-    res.send('<h1>Welcome</h1>')
+app.use('/', (req, res, next) => {
+    console.log("This always Runs")
+    res.send('<h1>Hello From Express JS</h1>')
 })
-
 
 
 
