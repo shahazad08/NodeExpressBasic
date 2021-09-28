@@ -5,10 +5,13 @@ const express = require('express')
 const path = require('path')
 const app = express();
 
+
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 
 app.use(bodyParser.urlencoded({ extended: false }))
+//app.use(express.static(path.join(__dirname,'public')))
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(shopRoutes)
 app.use('/admin', adminRoutes)
