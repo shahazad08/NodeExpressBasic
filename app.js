@@ -5,6 +5,9 @@ const express = require('express')
 const path = require('path')
 const app = express();
 
+app.set('view engine', 'pug') // Setting the pug as a template engine
+app.set('views', 'views')  // Path or a file which we need to render from that...
+
 
 const adminData = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
