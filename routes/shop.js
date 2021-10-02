@@ -8,7 +8,7 @@ router.get('/', (req, res, next) => {
     console.log("This always Runs Shop Page")
     console.log('Shop JS FIle',adminData.products)
     const products=adminData.products
-    res.render('shop', {prods:products,docTitle:'Shop'})    // Rendering Pug FIle
+    res.render('shop', {prods:products,pageTitle:'Shop', path: '/'})    // Rendering Pug FIle
 
 
 
