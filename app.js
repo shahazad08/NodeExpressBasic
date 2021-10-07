@@ -4,10 +4,10 @@ const bodyParser = require('body-parser');
 const express = require('express')
 const path = require('path')
 const app = express();
-const expressHbs=require('express-handlebars')
 
-app.engine("hbs", expressHbs({layoutsDir:'views/layouts/', defaultLayout: 'main-layout', extname:'hbs' }));
-app.set('view engine', 'hbs') // Setting the pug as a template engine
+
+
+app.set('view engine', 'ejs') // Setting the pug as a template engine
 app.set('views', 'views')  // Path or a file which we need to render from that...
 
 
