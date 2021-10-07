@@ -4,8 +4,10 @@ const bodyParser = require('body-parser');
 const express = require('express')
 const path = require('path')
 const app = express();
+const expressHbs=require('express-handlebars')
 
-app.set('view engine', 'pug') // Setting the pug as a template engine
+app.engine("hbs", expressHbs({ defaultLayout: false }));
+app.set('view engine', 'hbs') // Setting the pug as a template engine
 app.set('views', 'views')  // Path or a file which we need to render from that...
 
 
