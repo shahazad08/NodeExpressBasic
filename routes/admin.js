@@ -1,25 +1,16 @@
 const express = require('express')
 const router = express.Router();
-const path = require('path')
-const rootDir = require('../util.js/path');
+const productsController=require('../controllers/products')
 
-const products=[]
 
 // /admin/add-product=> GET
-router.get('/add-product', (req, res, next) => {
-    console.log("Add Product Pagee");
-    //    res.send('<form action="/admin/add-product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></form>')  // Basic One
-  //  res.sendFile(path.join(rootDir, 'views', 'add-product.html'))   // Create HTMl
-    res.render('add-product', {pageTitle:'Add Product', path: '/admin/add-product', formCSS:true, productCSS:true, activeAddProduct:true})
-});
+router.get('/add-product', productsController.getAddProduct);
 
 // /admin/add-product=> POST
-router.post('/add-product', (req, res, next) => {
-    console.log(req.body)
-    products.push({title:req.body.title})
-    res.redirect('/');
-})
+router.post('/add-product', productsController.postAddProduct)
 
-//module.exports = router
-exports.routes=router
-exports.products=products
+module.exports=router;
+
+
+  //    res.send('<form action="/admin/add-product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></form>')  // Basic One
+  //  res.sendFile(path.join(rootDir, 'views', 'add-product.html'))   // Create HTMl

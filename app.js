@@ -11,7 +11,7 @@ app.set('view engine', 'ejs') // Setting the pug as a template engine
 app.set('views', 'views')  // Path or a file which we need to render from that...
 
 
-const adminData = require('./routes/admin')
+const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(shopRoutes)
-app.use('/admin', adminData.routes)
+app.use('/admin', adminRoutes)
 
 app.use((req, res, next) => {
     //    res.status(404).send('<h1>Page Not Found</h1>')
