@@ -22,5 +22,5 @@ exports.getProducts=(req, res, next) => {
         hasProducts:products.length > 0,
         activeShop:true,
         productCSS:true
-    })    // Rendering Pug FIle
+    })    
 }
