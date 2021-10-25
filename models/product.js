@@ -32,7 +32,7 @@ module.exports = class Product {
         console.log(err);
       });
     });
-  }
+  } 
 
   static fetchAll(cb) {
     getProductsFromFile(cb);
