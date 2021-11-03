@@ -17,7 +17,6 @@ exports.getProduct=(req, res, next)=> {
         console.log(product)
         res.render('shop/product-details', {product:product, pageTitle:product.title, path:'/products'})
     })
-    
 }
 
 exports.getIndex=(req,res,next)=> {
@@ -62,6 +61,14 @@ exports.postCart=(req,res,next)=> {
         Cart.addProduct(prodId, product.price)
     })
     res.redirect('/cart')
+}
+
+exports.postCartDeleteProduct=(req, res, next)=> {
+    const prodId=req.body.productId
+    Product.findById(prodId, product=> {
+        Cart.deleteProduct(prodId, product.price);
+        res.redirect('/cart')
+    })
 }
 
 exports.getOrders=(req,res,next)=> {
