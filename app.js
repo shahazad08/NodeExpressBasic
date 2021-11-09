@@ -19,6 +19,12 @@ const errorControllers=require('./controllers/error')
 const db=require('./util.js/database')
 
 db.execute('SELECT * FROM products')
+   .then(result => {
+      console.log(result[0], result[1])
+   })
+   .catch(err=> {
+      console.log("Err is--",err)
+})
 
 app.use(bodyParser.urlencoded({ extended: false }))
 //app.use(express.static(path.join(__dirname,'public')))
