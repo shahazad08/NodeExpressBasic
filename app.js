@@ -16,6 +16,10 @@ const shopRoutes = require('./routes/shop')
 
 const errorControllers=require('./controllers/error')
 
+const db=require('./util.js/database')
+
+db.execute('SELECT * FROM products')
+
 app.use(bodyParser.urlencoded({ extended: false }))
 //app.use(express.static(path.join(__dirname,'public')))
 app.use(express.static(path.join(__dirname, 'public')));
