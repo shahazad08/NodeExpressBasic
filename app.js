@@ -31,7 +31,7 @@ app.use(errorControllers.get404)
 sequelize
    .sync()
    .then(result=> {
-      console.log(result)
+     // console.log(result)
       app.listen(4001)
 
    })
