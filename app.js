@@ -11,17 +11,12 @@ app.set('view engine', 'ejs') // Setting the pug as a template engine
 app.set('views', 'views')  // Path or a file which we need to render from that...
 
 
-const adminRoutes = require('./routes/admin')
-const shopRoutes = require('./routes/shop')
+// const adminRoutes = require('./routes/admin')
+// const shopRoutes = require('./routes/shop')
 
 const errorControllers=require('./controllers/error')
+const mongoConnect=require('./util.js/database')
 
-const sequelize=require('./util.js/database')
-
-const Product=require('./models/product')
-const User=require('./models/user')
-const Cart=require('./models/cart')
-const CartItem=require('./models/cart-item')
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -29,55 +24,23 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next)=> {
-   User.findByPk(1)
-      .then(user=> {
-         req.user=user
-         next()
-      })
-      .catch(err=> {console.log(err)})
+   // User.findByPk(1)
+   //    .then(user=> {
+   //       req.user=user
+   //       next()
+   //    })
+   //    .catch(err=> {console.log(err)})
 })
 
-app.use(shopRoutes)
-app.use('/admin', adminRoutes)
+// app.use(shopRoutes)
+// app.use('/admin', adminRoutes)
 
 app.use(errorControllers.get404)
 
-Product.belongsTo(User, {constraints:true, onDelete:'CASCADE'});
-User.hasMany(Product)
-User.hasOne(Cart)
-Cart.belongsTo(User)
-Cart.belongsToMany(Product, {through:CartItem})
-Product.belongsToMany(Cart, {through:CartItem})
-
-
-sequelize
-  // .sync({force:true})
-   .sync()
-   .then(result=> {
-//     console.log("Data us---", result)
-      return User.findByPk(1)
-     
-   })
-   .then(user=> {
-      if(!user) {
-         return User.create({name:'Max', email:'test@test.com'})
-      }
-      return user
-   })
-   .then(user=> {
-      console.log("User is", user)
-      return user.createCart()
-     // app.listen(4001)
-   })
-   .then(cart=> {
-      app.listen(4001)
-   })
-   .catch(err=> {
-      console.log(err)
-   })
-
-
-
+mongoConnect(client=> {
+   console.log(client)
+   app.listen(4001)
+})
 
 
 //or
