@@ -12,7 +12,7 @@ app.set('views', 'views')  // Path or a file which we need to render from that..
 
 
  const adminRoutes = require('./routes/admin')
-// const shopRoutes = require('./routes/shop')
+ const shopRoutes = require('./routes/shop')
 
 const errorControllers=require('./controllers/error')
 const mongoConnect=require('./util.js/database').mongoConnect
@@ -33,7 +33,7 @@ app.use((req, res, next)=> {
    next()
 })
 
-// app.use(shopRoutes)
+ app.use(shopRoutes)
  app.use('/admin', adminRoutes)
 
 app.use(errorControllers.get404)
