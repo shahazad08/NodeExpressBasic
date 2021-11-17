@@ -3,18 +3,27 @@ const getDb=require('../util.js/database').getDb
 
 
 class Product {
-  constructor(title, price, description, imageUrl) {
+  constructor(title, price, description, imageUrl,id) {
     this.title = title;
     this.price = price;
     this.description = description;
     this.imageUrl = imageUrl;
+    this._id=id
   }
 
   save() {
     const db = getDb();
-    return db
-      .collection('products')
+    let dbOp
+    if(this._id) {
+      // Update Product
+      dbOp=db.collection('products')
+      .updateOne({_id: new mongodb.ObjectId(this._id)}, {$set:this}) 
+    }
+    else {
+      dbOp=db.collection('products')
       .insertOne(this)
+    }
+    return db
       .then(result => {
         console.log("Result is----", result);
       })
@@ -53,7 +62,5 @@ class Product {
       })
   }
 }
-
-
 
 module.exports=Product
