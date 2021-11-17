@@ -1,7 +1,5 @@
-const mongodb=require('mongodb')
-const Product= require('../models/product')
 
-const ObjectId=mongodb.ObjectId
+const Product= require('../models/product')
 
 exports.getAddProduct=(req, res, next) => {
     console.log("Add Product Pagee");
@@ -62,13 +60,12 @@ exports.getEditProduct=(req, res, next) => {
 }
 
 exports.postEditProduct=(req,res,next)=> {
-    console.log('----------')
     const prodId=req.body.productId
     const updatedTitle=req.body.title
     const updatedImageUrl=req.body.imageUrl
     const updatedDesc=req.body.description
     const updatedPrice=req.body.price
-    const product=new Product(updatedTitle, updatedPrice,updatedDesc, updatedImageUrl,new ObjectId(prodId))
+    const product=new Product(updatedTitle, updatedPrice,updatedDesc, updatedImageUrl,prodId)
     product
         .save()
         .then(result=> {
