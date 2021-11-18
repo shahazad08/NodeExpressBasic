@@ -110,3 +110,4 @@ exports.postDeleteProduct=(req, res, next)=> {
             console.log(err)
         })
 }
+    
