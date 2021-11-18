@@ -97,24 +97,16 @@ exports.getProducts=(req, res,next)=> {
         })    
      
 }
-/*
-exports.postDeleteProduct=(req, res, next)=> {
-    
-    const prodId=req.body.productId
 
+exports.postDeleteProduct=(req, res, next)=> {
+    const prodId=req.body.productId
     //console.log("Delete Product is", prodId)
-   // Product.deleteById(prodId)
-   Product.findByPk(prodId)
-    .then(product=>{
-        return product.destroy()
-    })
-    .then(result=> {
-        console.log("Product Deleted")
-        res.redirect('/admin/products')
-    })
-    .catch(err=> {
-        console.log(err)
-    })
-   
+    Product.deleteById(prodId)
+        .then(() => {
+            console.log("Product Deleted")
+            res.redirect('/admin/products')
+        })
+        .catch(err=> {
+            console.log(err)
+        })
 }
-*/
