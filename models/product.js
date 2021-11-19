@@ -3,12 +3,13 @@ const getDb=require('../util.js/database').getDb
 
 
 class Product {
-  constructor(title, price, description, imageUrl,id) {
+  constructor(title, price, description, imageUrl,id, userId) {
     this.title = title;
     this.price = price;
     this.description = description;
     this.imageUrl = imageUrl;
     this._id= id ? new mongodb.ObjectId(id) : null
+    this.userId=userId
   }
 
   save() {
@@ -25,6 +26,7 @@ class Product {
     }
     return dbOp
       .then(result => {
+        console.log("Excetion 2")
         console.log("Result is----", result);
       })
       .catch(err => {
@@ -39,7 +41,7 @@ class Product {
       .find()
       .toArray()
       .then(products=> {
-        console.log(products);
+        console.log("Execution 1*",products);
         return products
       })
       .catch(err=> {

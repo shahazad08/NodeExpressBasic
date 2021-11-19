@@ -34,6 +34,7 @@ exports.getProduct=(req, res, next)=> {
 exports.getIndex=(req,res,next)=> {
     Product.fetchAll()
     .then(products=> {
+        console.log("Execution 2**", products)
         res.render('shop/product-list', {
             prods:products,
             pageTitle:'All Products', 
