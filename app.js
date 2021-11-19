@@ -16,6 +16,8 @@ app.set('views', 'views')  // Path or a file which we need to render from that..
 
 const errorControllers=require('./controllers/error')
 const mongoConnect=require('./util.js/database').mongoConnect
+const User=require('./models/user')
+
 
 
 
@@ -24,12 +26,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next)=> {
-   // User.findByPk(1)
-   //    .then(user=> {
-   //       req.user=user
-   //       next()
-   //    })
-   //    .catch(err=> {console.log(err)})
+   User.findById('619747a992bdb5837d4ee6f7')
+      .then(user=> {
+         req.user=user
+         next()
+      })
+      .catch(err=> {console.log(err)})
    next()
 })
 
