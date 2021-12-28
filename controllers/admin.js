@@ -71,11 +71,17 @@ exports.postEditProduct=(req,res,next)=> {
     const updatedImageUrl=req.body.imageUrl
     const updatedDesc=req.body.description
     const updatedPrice=req.body.price
-    const product=new Product(updatedTitle, updatedPrice,updatedDesc, updatedImageUrl,prodId)
-    product
-        .save()
+    
+    Product.findById(prodId)
+        .then(product=> {
+            product.title=updatedTitle
+            product.price=updatedPrice
+            product.description=updatedDesc
+            product.imageUrl=updatedImageUrl
+            return product.save()
+        })
         .then(result=> {
-            console.log("Updated Product")
+            console.log("Updated Product", result)
             res.redirect('/admin/products')
         })
         .catch(err=> {
@@ -107,7 +113,7 @@ exports.getProducts=(req, res,next)=> {
 exports.postDeleteProduct=(req, res, next)=> {
     const prodId=req.body.productId
     //console.log("Delete Product is", prodId)
-    Product.deleteById(prodId)
+    Product.findByIdAndRemove(prodId)
         .then(() => {
             console.log("Product Deleted")
             res.redirect('/admin/products')
