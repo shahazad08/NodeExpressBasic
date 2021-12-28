@@ -29,15 +29,16 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //app.use(express.static(path.join(__dirname,'public')))
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use((req, res, next)=> {
-//    User.findById('619747a992bdb5837d4ee6f7')
-//       .then(user=> {
-//          req.user=user
-//          next()
-//       })
-//       .catch(err=> {console.log(err)})
-//   // next()
-// })
+app.use((req, res, next)=> {
+   User.findById('61cad97bf16da4c005e62025')
+      .then(user=> {
+        console.log("User is", user);
+         req.user=user
+         next()
+      })
+      .catch(err=> {console.log(err)})
+  // next()
+})
 
  app.use(shopRoutes)
  app.use('/admin', adminRoutes)
@@ -49,6 +50,19 @@ mongoose.connect(dbConfig.url, {
    useNewUrlParser: true
    }).then(() => {
      console.log("Successfully connected to the database");
+     User.findOne().then(user=>{
+       if(!user) {
+        const user=new User({
+          name:'Max',
+          email:'max@test.com',
+          cart:{
+            items:[]
+          }
+        })
+        user.save()
+       }
+     })
+    
      app.listen(4001)
 
    }).catch(err => {
