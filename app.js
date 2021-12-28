@@ -49,14 +49,16 @@ mongoose.connect(dbConfig.url, {
    useNewUrlParser: true
    }).then(() => {
      console.log("Successfully connected to the database");
+     app.listen(4001)
+
    }).catch(err => {
      console.log('Could not connect to the database.', err);
      process.exit();
    });
 
-   app.listen(port, () => {
-      console.log(`Node server is listening on port ${port}`);
-   });
+   // app.listen(port, () => {
+   //    console.log(`Node server is listening on port ${port}`);
+   // });
 
 
 //or

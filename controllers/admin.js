@@ -24,6 +24,7 @@ exports.postAddProduct=(req, res, next) => {
     product
       .save()
       .then(result => {
+            console.log("Products-", result);
          console.log("Execution 1");
         console.log('Created Product');
         res.redirect('/admin/products');
@@ -89,7 +90,7 @@ exports.postEditProduct=(req,res,next)=> {
 
 exports.getProducts=(req, res,next)=> {
     //Product.findAll()
-    Product.fetchAll()
+    Product.find()
         .then(products=> {
             res.render('admin/products', {
                 prods:products,
