@@ -62,7 +62,6 @@ mongoose.connect(dbConfig.url, {
         user.save()
        }
      })
-    
      app.listen(4001)
 
    }).catch(err => {
