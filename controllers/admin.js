@@ -98,7 +98,9 @@ exports.postEditProduct=(req,res,next)=> {
 exports.getProducts=(req, res,next)=> {
     //Product.findAll()
     Product.find()
+     
         .then(products=> {
+            console.log("Pro", products)
             res.render('admin/products', {
                 prods:products,
                 pageTitle:'Admin Products', 
@@ -124,3 +126,7 @@ exports.postDeleteProduct=(req, res, next)=> {
         })
 }
     
+/*
+.select('title price -_id')
+.populate('userId', 'name')
+*/
