@@ -19,7 +19,7 @@ exports.getProduct=(req, res, next)=> {
     const prodId=req.params.productId
     Product.findById(prodId)
         .then(product => {
-            console.log("Get Product",product)
+            //console.log("Get Product",product)
             res.render('shop/product-details', {
                 product:product, 
                 pageTitle:product.title, 
@@ -47,9 +47,13 @@ exports.getIndex=(req,res,next)=> {
 }
 
 exports.getCart = (req, res, next) => {
+    console.log("Requested User", req.user);
     req.user
-      .getCart()
-      .then(products => {
+      .populate('cart.items.productId')
+    
+      .then(user => {
+        console.log("User add to cart get products", user.cart.items)
+        const products=user.cart.items
         res.render('shop/cart', {
           path: '/cart',
           pageTitle: 'Your Cart',
@@ -67,7 +71,7 @@ exports.postCart = (req, res, next) => {
         return req.user.addToCart(product);
       })
       .then(result => {
-        console.log(result);
+        // console.log("REEE",result);
         res.redirect('/cart');
       });
   };

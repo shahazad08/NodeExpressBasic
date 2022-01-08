@@ -32,7 +32,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next)=> {
    User.findById('61cad97bf16da4c005e62025')
       .then(user=> {
-        console.log("User is", user);
          req.user=user
          next()
       })
